@@ -18,11 +18,12 @@ class CbrProvider implements ProviderInterface
     }
 
     /**
+     * Money.Js format
      * @return string
      */
     private function getUrl(): string
     {
-        return 'https://www.cbr-xml-daily.ru/daily_json.js';
+        return 'https://www.cbr-xml-daily.ru/latest.js';
     }
 
     /**

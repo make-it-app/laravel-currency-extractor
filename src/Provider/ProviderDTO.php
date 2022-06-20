@@ -34,16 +34,13 @@ class ProviderDTO
     {
         $output = [];
         $dated  = Carbon::now();
-        if ( !empty( $this->array[ 'Valute' ] ) )
+        if ( !empty( $this->array[ 'rates' ] ) )
         {
-            foreach ( $this->array[ 'Valute' ] as $rate )
+            foreach ( $this->array[ 'rates' ] as $code => $rate )
             {
-                if ( in_array( $rate[ 'CharCode' ], config( 'currency-extractor.valutes' ) ) )
+                if ( in_array( $code, config( 'currency-extractor.valutes' ) ) )
                 {
-                    $output[ $rate[ 'CharCode' ] ] = [
-                        'Nominal' => $rate[ 'Nominal' ],
-                        'Value'   => $rate[ 'Value' ],
-                    ];
+                    $output[ $code ] = $rate;
                 }
             }
         }
