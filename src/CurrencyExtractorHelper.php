@@ -2,19 +2,26 @@
 
 namespace MakeIT\LaravelCurrencyExtractor;
 
+use Cache;
 use CurrencyExtractor;
-use \Cache;
+use MakeIT\LaravelCurrencyExtractor\Jobs\CurrencyCacheToDatabaseJob;
 
 class CurrencyExtractorHelper
 {
     /**
      * @param string $key
+     * @param bool   $force_logging
      * @return array
      */
-    public static function fetch_currency( string $key = 'currencies' ): array
+    public static function fetch_currency( string $key = 'currencies', bool $force_logging = false ): array
     {
+        if ( $force_logging )
+        {
+            config()->set( 'currency-extractor.logging', true );
+        }
         $extractor = CurrencyExtractor::make();
         $extractor->fetchAndCache( $key );
+        CurrencyCacheToDatabaseJob::dispatch();
         return $extractor->getRates();
     }
 

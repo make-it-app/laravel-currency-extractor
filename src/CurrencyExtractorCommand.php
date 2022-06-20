@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 namespace MakeIT\LaravelCurrencyExtractor;
 
 use Illuminate\Console\Command;
+use MakeIT\LaravelCurrencyExtractor\Jobs\CurrencyCacheToDatabaseJob;
 
 class CurrencyExtractorCommand extends Command
 {
@@ -38,13 +39,17 @@ class CurrencyExtractorCommand extends Command
         $this->_start();
         $this->usage();
         $this->msg( ' ➥ Deleting the cache...' );
-        CurrencyExtractorHelper::destroy_currencies( 'currencies' );
+        //CurrencyExtractorHelper::destroy_currencies();
         $this->usage();
         $this->msg( ' ➥ Fetching Currencies...' );
-        $data = CurrencyExtractorHelper::fetch_currency( 'currencies' );
+        $data = CurrencyExtractorHelper::fetch_currency();
         $this->msg( ' ➥ Request Timestamp: ' . $data[ 0 ]->format( 'Y-m-d H:i:s' ) );
         $this->newLine();
         dump( $data[ 1 ] );
+        $this->newLine();
+        $this->usage();
+        $this->msg( ' ➥ Fill up the Database...' );
+        CurrencyCacheToDatabaseJob::dispatch();
         $this->newLine();
         $this->usage();
         $this->newLine();
@@ -81,8 +86,6 @@ class CurrencyExtractorCommand extends Command
 
     /**
      * Выводит типизированное сообщение с таймером времени работы скрипта
-     * @param string $text
-     * @param string $type
      * @return void
      */
     protected function usage(): void
