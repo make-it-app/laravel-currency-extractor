@@ -9,8 +9,9 @@ php artisan vendor:publish --provider="MakeIT\LaravelCurrencyExtractor\CurrencyE
 **Please observe the config-file first!**
 
 If You plan to work with:<br>
-- Observers `php artisan vendor:publish --provider="MakeIT\LaravelCurrencyExtractor\CurrencyExtractorServiceProvider" --tag="observers"`
-- Policies `php artisan vendor:publish --provider="MakeIT\LaravelCurrencyExtractor\CurrencyExtractorServiceProvider" --tag="policies"`
+- Observers `php artisan vendor:publish --provider="MakeIT\LaravelCurrencyExtractor\CurrencyExtractorServiceProvider" --tag="observers"` You are free to mod this file after publishing!
+- Policies `php artisan vendor:publish --provider="MakeIT\LaravelCurrencyExtractor\CurrencyExtractorServiceProvider" --tag="policies"` You are free to mod this file after publishing!
+- Nova `php artisan vendor:publish --provider="MakeIT\LaravelCurrencyExtractor\CurrencyExtractorServiceProvider" --tag="nova"` Attention, tested only on Nova 4! You are free to mod this file after publishing!
 
 # Usage
 

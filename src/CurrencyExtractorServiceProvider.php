@@ -36,6 +36,7 @@ class CurrencyExtractorServiceProvider extends ServiceProvider
             $this->publishes( [ __DIR__ . '/../config/currency-extractor.php' => config_path( 'currency-extractor.php' ), ], 'config' );
             $this->publishes( [ __DIR__ . '/Observers/CurrencyObserver.php' => app_path( 'Observers/CurrencyObserver.php' ), ], 'observers' );
             $this->publishes( [ __DIR__ . '/Policies/CurrencyPolicy.php' => app_path( 'Policies/CurrencyPolicy.php' ), ], 'policies' );
+            $this->publishes( [ __DIR__ . '/NovaCurrencies.php' => app_path( 'Nova/NovaCurrencies.php' ), ], 'nova' );
         }
         $this->app->bind( ProviderInterface::class, config( 'currency-extractor.provider_class' ) );
         $this->app->alias( CurrencyExtractorInterface::class, 'currency.extractor' );
